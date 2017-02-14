@@ -7,11 +7,11 @@
     <title>Your Social Media Fingerprint</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Without your consent most major web platforms leak whether you are logged in. This allows any website to detect on which platforms you're signed up. Since there are lots of platforms with specific demographics an attacker could reason about your personality, too.">
-    <meta property="image" content="http://ubercookie.robinlinus.com/ubercookie-logo-large.png" />
+    <meta property="image" content="https://robinlinus.github.io/socialmedia-leak/sml-logo-large.png?a=a" />
     <meta property="author" content="Robin Linus" />
     <meta property="og:title" content="Your Social Media Fingerprint" />
-    <meta property="og:image" content="http://ubercookie.robinlinus.com/ubercookie-logo-large.png" />
-    <meta property="og:image:url" content="http://ubercookie.robinlinus.com/ubercookie-logo-large.png" />
+    <meta property="og:image" content="https://robinlinus.github.io/socialmedia-leak/sml-logo-large.png?a=a" />
+    <meta property="og:image:url" content="https://robinlinus.github.io/socialmedia-leak/sml-logo-large.png?a=a" />
     <meta property="og:site_name" content="Your Social Media Fingerprint" />
     <meta property="og:type" content="article" />
     <meta property="og:author" content="https://facebook.com/RobinLinus" />
@@ -21,7 +21,7 @@
     <meta property="fb:app_id" content="1527795287522439" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Your Social Media Fingerprint">
-    <meta name="twitter:image" content="http://ubercookie.robinlinus.com/ubercookie-logo-large.png" />
+    <meta name="twitter:image" content="https://robinlinus.github.io/socialmedia-leak/sml-logo-large.png?a=a" />
     <meta name="twitter:description" content="Without your consent most major web platforms leak whether you are logged in. This allows any website to detect on which platforms you're signed up. Since there are lots of platforms with specific demographics an attacker could reason about your personality, too.">
     <meta name="twitter:creator:id" content="4675481071">
     <meta name="author" content="Robin Linus" />
@@ -135,6 +135,7 @@
         font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
         color: white;
         cursor: pointer;
+        margin-bottom: 49px;
     }
     
     footer:hover {
@@ -168,6 +169,12 @@
             <p>
                 Without your consent most major web platforms leak whether you are logged in. This allows any website to detect on which platforms you're signed up. Since there are lots of platforms with specific demographics an attacker could reason about your personality, too.
             </p>
+            <p id="ff" style="display:none;">
+                Update: If you see broken images like this: <img src="https://facebook.com/favicon.ico" onload="document.getElementById('ff').remove()" onerror="document.getElementById('ff').style='display:block;'"> instead of a logo, the login detection won't work for this platforms because your browser is blocking requests to their domain. If you're using Firefox <a href="#updates">read the updates.</a>
+            </p>
+            <p>
+                This project is an open source contribution of <a href="https://robinlinus.github.io"><b>RobinLinus</b> - Security, Privacy & Blockchain Consulting</a>.
+            </p>
         </section>
         <section class="demo">
             <h2>Demonstration</h2>
@@ -175,7 +182,9 @@
                 <p>
                     <h3>You are logged in to:</h3>
                     <div id="loggedIn">
-                        <h4>No platform</h4>(or you're using something like Privacy Badger)
+                        <h2>No platform</h2>
+                        <p>(or maybe you've disabled third party cookies, or you are using something like Privacy Badger?)</p>
+                        <br><br><br>
                     </div>
                 </p>
                 <p>
@@ -229,9 +238,20 @@
             <p>
                 This mechanism works for almost all major web platforms, because they all have a redirect parameter in their login endpoint and they need to host their favicon on their domain (<a target="_blank" href="https://en.wikipedia.org/wiki/Favicon#Limitations_and_criticism">bc of browser compatibility, and of the technical debt of the former lack of standards</a>).
             </p>
-            <h4>Updates</h4>
+            <h4 id="updates">Updates</h4>
             <p>
-                2016/10/07: Instagram removed the favicon from their root domain and host their favicon on their CDN now.
+                <ul>
+                    <li>2016/10/07: Instagram removed the favicon from their root domain and host their favicon on their CDN now.</li>
+                    <li>2016/10/14: <a target="_blank" href="http://meta.stackoverflow.com/questions/336225/so-should-stop-leaking-information-to-other-websites-about-whether-we-are-logged"> Stackoverflow has fixed the issue.</a></li>
+                    <li>2016/10/14: It looks like Firefox has fixed the issue at least for the major networks with their <a target="_blank" href="https://developer.mozilla.org/en-US/Firefox/Privacy/Tracking_Protection">default tracking protection blacklist</a> (The blacklist comes from <a target="_blank" href="https://disconnect.me/">https://disconnect.me/</a>). 
+                        <br>
+                        <br>Console screenshot of the errors when visting socialmedia-leak with current Firefox:
+                        <a target="_blank" href="firefox.png"><img src="firefox.png" style="width:100%"></a>
+                        Though it probably still works for all platforms where you don't see a broken image <img src="a"> instead of a logo.  
+                    </li>
+                    <li>2016/10/14: Netflix now just redirects to the main browse page regardless of the redirect in the URL.</li>
+                </ul>
+            </p>
             </p>
         </section>
         <section>
@@ -241,10 +261,11 @@
             </p>
         </section>
         <section>
-            <h2>Protection</h2> 
-            <p>You can install a browser plugin like <a href="https://www.google.com/search?q=privacy+badger" target="_blank">Privacy Badger</a> to protect yourself from this attack.</p>
+            <h2>Protection</h2>
+            <p>First of all: <a href="https://www.google.com/search?q=third+party+cookies&oq=third+party+cookies" target="_blank">disable third party cookies.</a></p>
+            <p>You can also install a browser plugin like <a href="https://www.google.com/search?q=privacy+badger" target="_blank">Privacy Badger</a>, or <a href="https://www.google.com/search?q=umatrix" target="_blank">uMatrix</a> to protect yourself from this attack.</p>
             <p>
-                For further information see the <a href="https://news.ycombinator.com/item?id=12692190" target="blank" rel="noreferrer">discussion on Hackernews</a>.
+                For further information see the <a href="https://news.ycombinator.com/item?id=12692190" target="blank" rel="noreferrer">discussion on Hackernews</a> or this <a href="https://www.reddit.com/r/programming/comments/5741xk/your_social_media_fingerprint/" target="blank" rel="noreferrer">discussion on Reddit</a>.
             </p>
         </section>
         <section>
@@ -256,7 +277,7 @@
                 <li><a target="_blank" href="https://twitter.com/home?status=https%3A//robinlinus.github.io/socialmedia-leak">Share this demo on Twitter</a></li>
                 <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//robinlinus.github.io/socialmedia-leak">Share this demo on Facebook</a></li>
                 <li><a target="_blank" href="https://plus.google.com/share?url=https%3A//robinlinus.github.io/socialmedia-leak">Share this demo on Google+</a></li>
-                <li><a  data-action="share/whatsapp/share" href="whatsapp://send?text=https://robinlinus.github.io/socialmedia-leak" data-action="share/whatsapp/share">Share this demo via Whatsapp</a></li>
+                <li><a data-action="share/whatsapp/share" href="whatsapp://send?text=https://robinlinus.github.io/socialmedia-leak" data-action="share/whatsapp/share">Share this demo via Whatsapp</a></li>
                 <li><a target="_blank" href="https://github.com/RobinLinus/socialmedia-leak">Star this project on Github</a></li>
             </ul>
             <p>If you find more web platforms that are vulnerable to this attack, <a href="https://github.com/RobinLinus/socialmedia-leak/issues">please file an issue to add it.</a> The more complete this list is, the bigger the issue and the higher the pressure for platforms to fix it.
@@ -273,15 +294,17 @@
             <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-                        <br>
             <br>
             <br>
             <br>
-
+            <br>
         </section>
+
+
         <section>
             <h3>If you like this page maybe you like my other works, too:</h3>
             <ul>
+                <li><a target="_blank" href="https://robinlinus.github.io"><b>RobinLinus</b> - Security, Privacy & Blockchain Consulting.</a></li>
                 <li><a target="_blank" href="https://snapdrop.net"><b>Snapdrop:</b> Instantly share files with devices nearby. No Setup, No Signup.</a></li>
                 <li><a target="_blank" href="http://webkay.robinlinus.com"><b>Webkay:</b> A demonstration of all the personal information your browser is leaking.</a></li>
                 <li><a target="_blank" href="http://ubercookie.robinlinus.com"><b>Ubercookie:</b> An irrevocable persistent browser cookie.</a></li>
@@ -292,13 +315,7 @@
                 <li><a target="_blank" href="https://twitter.com/robin_linus"><b>Twitter:</b> Follow me on Twitter to get updates about the stuff I create</a></li>
             </ul>
         </section>
-        <section>
-            <h2>Hire me!</h2>
-            <p>
-                I'm looking for a job as a Web App Pentester or Frontend Engineer. <a href="http://robinlinus.com/resume" target="_blank">Here you can find my resume</a>. If you're hiring ping me: <a href="mailto:robin@capira.de">robin@capira.de</a>
-            </p>
-        </section>
-    </div>
+</div>
     <script src="demo.js"></script>
     <script>
     var isFirstLoggedIn = true;
@@ -347,11 +364,12 @@
     ga('create', 'UA-85165266-1', 'auto');
     ga('send', 'pageview');
     </script>
-    <a href="http://twitter.com/robin_linus" target="_blank" id="about">
+    <a href="https://robinlinus.github.io" target="_blank" id="about">
         <footer>
             Built with ♥ by Robin Linus
         </footer>
     </a>
+    <iframe style="position:fixed;bottom:0;" src="https://robinlinus.github.io/share-the-love/#msg=Your Social Media Fingerprint&url=https://robinlinus.github.io/socialmedia-leak&paypal=robin@capira.de&twitter=robin_linus&bitcoin=176s9TkKmAFdL5gP36u9VZym9zPVVEcFo9" height="50" width="100%" frameborder="0"></iframe>
 </body>
 
 </html>
